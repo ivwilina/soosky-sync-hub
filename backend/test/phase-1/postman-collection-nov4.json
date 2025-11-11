@@ -1,0 +1,260 @@
+{
+  "info": {
+    "name": "Soosky Sync Hub API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Default",
+      "item": [
+        {
+          "name": "Index",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management - User",
+      "item": [
+        {
+          "name": "Get User Information",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user/:id"
+          }
+        },
+        {
+          "name": "Update Personal Information",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/user/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"updated@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/user/password/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"currentPassword\",\n  \"newPassword\": \"newPassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management - Admin",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user-management/admin/users"
+          }
+        },
+        {
+          "name": "Get User Information (Admin)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user-management/admin/users/:id"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/user-management/admin/users",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New User\",\n  \"email\": \"newuser@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Modify User",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/user-management/admin/users/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"updated@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Users",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/user-management/admin/users/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": [\"id1\", \"id2\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Incognito QA - User",
+      "item": [
+        {
+          "name": "Get All Letters",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/incognito-letter/letters/:id"
+          }
+        },
+        {
+          "name": "Get Single Letter",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/incognito-letter/letters/:id"
+          }
+        },
+        {
+          "name": "Reply to Letter",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/incognito-letter/letters/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user123\",\n  \"userName\": \"John Doe\",\n  \"replyMsg\": \"Reply content here\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Send Letter",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/incognito-letter/letters",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user123\",\n  \"userName\": \"John Doe\",\n  \"letterTitle\": \"Letter Title\",\n  \"letterContent\": \"Letter content here\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Incognito QA - Admin",
+      "item": [
+        {
+          "name": "Get All Letters (Admin)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/incognito-letter/admin/letters"
+          }
+        },
+        {
+          "name": "Get Single Letter (Admin)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/incognito-letter/admin/letters/:id"
+          }
+        },
+        {
+          "name": "Reply to Letter (Admin)",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/incognito-letter/admin/letters/:id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"admin123\",\n  \"userName\": \"Admin User\",\n  \"replyMsg\": \"Admin reply content\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Letters",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/incognito-letter/admin/letters",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"letterId\": [\"letter1\", \"letter2\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
