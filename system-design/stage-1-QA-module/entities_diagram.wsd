@@ -1,0 +1,72 @@
+@startuml entities_diagram
+
+' left to right direction
+
+object obj_user {
+  _id: string
+  name: string
+  email: string
+  password: string
+  permission: enum
+}
+
+object obj_incognito_letter {
+  _id: string
+  author: string
+  status: enum
+  reply: [reply]
+  title: string
+  content: string
+}
+
+enum enum_permission {
+  Admin: adminitrastor
+  Emp: employee
+}
+
+enum enum_status {
+  Pending: pending
+  Seen: seen
+  Replied: replied
+}
+
+class User {
+  {field} -id: string
+  {field} -name: string
+  {field} -email: string
+  {method} +login()
+  {method} +getPersonalInformation()
+  {method} +changeAccountPassword()
+  {method} +getPersonalIncognitoLetters()
+  {method} +sendIncognitoLetter()
+  {method} +sendReplyWithinAnIncognitoLetter()
+  {method} +modifyPersonalInfomation()
+}
+
+class Admin {
+  {method} +getUsers()
+  {method} +createUser()
+  {method} +changeUserPermission()
+  {method} +deleteUser()
+  {method} +deleteLetters()
+}
+
+class IncognitoLetter {
+  {field} -id: string
+  {field} -status: enum
+  {field} -user_id: string
+  {field} -title: string
+  {field} -content: string
+  {field} -reply: string
+  {method} +getIncognitoLetters()
+  {method} +modifyIncognitoLetterStatus()
+  {method} +addReplyWithinAnIncognitoLetter()
+  {method} +deleteLetter()
+}
+
+obj_incognito_letter -- enum_status
+obj_user -- enum_permission
+
+Admin --|> User
+
+@enduml

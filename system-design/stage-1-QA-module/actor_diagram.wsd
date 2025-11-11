@@ -1,0 +1,31 @@
+@startuml actor_diagram
+
+' left to right direction
+
+:Admin: as adm
+:User: as usr
+
+(Login) as uc1
+
+rectangle private_letter {
+  (Send) as l1
+  (Read) as l2
+  (Comment) as l3
+}
+
+(Manage users) as uc5
+(Read and reply private letter) as uc6
+(Log) as uc7
+
+adm --|> usr
+usr --> uc1
+
+adm --> uc5
+adm --> uc6
+adm --> uc7
+
+adm ---> private_letter : all
+
+usr ---> private_letter : personal
+
+@enduml
