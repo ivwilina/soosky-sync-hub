@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model , Document} from "mongoose";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -7,7 +7,7 @@ enum Permission {
   Emp = "employee",
 }
 
-interface IUser {
+interface IUser extends Document{
   name: string;
   email: string;
   password: string;

@@ -36,6 +36,11 @@ export default class UserAdapter {
     }
   }
 
+  public async getUserByEmail(userEmail: string): Promise<IUser> {
+    const user = await User.find({ email: userEmail });
+    return user;
+  }
+
   public async updateUser(userId: string, ...params): Promise<IUser> {
     await User.findByIdAndUpdate(userId, ...params);
     const updatedUser = await User.findById(userId);

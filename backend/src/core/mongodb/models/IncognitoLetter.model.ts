@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -13,13 +13,13 @@ interface IAuthor {
   name: string;
 }
 
-interface IReply {
+interface IReply extends Document{
   author: IAuthor;
   content: string;
   createAt: string;
 }
 
-interface IIncognitoLetter {
+interface IIncognitoLetter extends Document{
   author: IAuthor;
   status: Status;
   reply: [IReply];
