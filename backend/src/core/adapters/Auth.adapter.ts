@@ -3,6 +3,8 @@ import { IUser, User } from "../mongodb/models/User.model";
 import shitty from "../../configs/ShittyConfig";
 import jwt from "jsonwebtoken";
 
+/*-----------------------------------------------------------------------------------------*/
+
 interface IJWTPayload {
   userId: string;
   permission: string;
@@ -26,7 +28,7 @@ export default class AuthAdapter {
     return jwtToken;
   }
 
-  public async isPasswordMatch(
+  public async checkPassword(
     email: string,
     password: string
   ): Promise<boolean> {
