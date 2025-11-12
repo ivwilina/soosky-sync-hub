@@ -13,13 +13,13 @@ interface IAuthor {
   name: string;
 }
 
-interface IReply extends Document{
+interface IReply {
   author: IAuthor;
   content: string;
   createAt: string;
 }
 
-interface IIncognitoLetter extends Document{
+interface IIncognitoLetter extends Document {
   author: IAuthor;
   status: Status;
   reply: [IReply];
@@ -36,14 +36,11 @@ const authorSchema = new Schema<IAuthor>(
   { _id: false }
 );
 
-const replySchema = new Schema<IReply>(
-  {
-    author: authorSchema,
-    content: { type: String, required: true },
-    createAt: { type: String, required: true },
-  },
-  { _id: false }
-);
+const replySchema = new Schema<IReply>({
+  author: authorSchema,
+  content: { type: String, required: true },
+  createAt: { type: String, required: true },
+});
 
 const incognitoLetterSchema = new Schema<IIncognitoLetter>({
   author: authorSchema,

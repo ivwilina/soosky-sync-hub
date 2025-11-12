@@ -1,8 +1,5 @@
 import AuthAdapter from "../adapters/Auth.adapter";
 import UserAdapter from "../adapters/User.adapter";
-import { User, IUser } from "../mongodb/models/User.model";
-import bcrypt from "bcrypt";
-
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -13,7 +10,19 @@ export default class AuthServices {
     const isValid = await this._authAdapter.checkPassword(email, password);
     if (isValid) {
       const user = await this._userAdapter.getUserByEmail(email);
-      const jwtToken = await this._authAdapter.generateToken(user._id, user.permission)
-    }
+      const jwtToken = await this._authAdapter.generateToken(
+        user._id.toString(),
+        user.permission
+      );
+      return {
+        userId: user._id,
+        userName: user.name,
+        permission: user.permission,
+        token: jwtToken,
+      };
+    } else
+      return {
+        message: "Email or Password is incorrect",
+      };
   }
 }

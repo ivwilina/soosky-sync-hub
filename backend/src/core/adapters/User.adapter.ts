@@ -37,7 +37,7 @@ export default class UserAdapter {
   }
 
   public async getUserByEmail(userEmail: string): Promise<IUser> {
-    const user = await User.find({ email: userEmail });
+    const user = await User.findOne({ email: userEmail });
     return user;
   }
 
