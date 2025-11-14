@@ -1,0 +1,16 @@
+* {
+  --primary-color: #FFFFFF;
+  --secondary-color: #F7F7F7;
+  --primary-invert-color: #000000;
+  --secondary-invert-color: #0e0e0e;
+  --primary-bg-color: #231F20;
+  --secondary-bg-color: #0A1929;
+  --primary-fg-color: #EFEFEF;
+  --secondary-fg-color: #FF8A00;
+  --primary-border-color: #01D7FF;
+  --secondary-border-color: ##3066BE;
+  --primary-container-color: #003B49;
+  --secondary-container-color: #1D123D;
+  --primary-dropdown-color: #000000;
+  --secondary-dropdown-color: #001C38;
+}
