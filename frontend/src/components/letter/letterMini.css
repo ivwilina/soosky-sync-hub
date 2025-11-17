@@ -1,0 +1,57 @@
+.lettermini-wrapper {
+  width: 20rem;
+}
+
+.lettermini-container {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid var(--primary-color);
+}
+
+.lettermini-container:hover {
+  border: 2px solid var(--primary-border-color);
+}
+
+.lettermini-container > h4 {
+  margin: 0;
+}
+
+.lettermini-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.lettermini-timestamp {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.lettermini-status {
+  border-radius: 5px;
+  padding: 2px 8px;
+}
+
+.lettermini-pending .lettermini-status {
+  border: 2px solid var(--primary-invert-color);
+  color: var(--primary-invert-color);
+}
+
+.lettermini-read .lettermini-status {
+  border: 2px solid var(--primary-border-color);
+  color: var(--primary-border-color);
+}
+
+.lettermini-replied .lettermini-status {
+  border: 2px solid var(--primary-border-color);
+  background-color: var(--primary-border-color);
+  color: var(--primary-color);
+}
+
+.lettermini-timestamp {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
