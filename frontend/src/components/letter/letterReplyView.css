@@ -1,0 +1,46 @@
+.letterreply-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  border: 1px solid black;
+  
+}
+
+.letterreply-container {
+  max-width: 65%;
+  margin: 15px;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: aqua;
+
+}
+
+.from-user {
+  justify-content: left;
+}
+
+.from-admin {
+  justify-content: right;
+}
+
+.from-user::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: aqua;
+  bottom: 5px;
+  left: 30px;
+  transform: rotate(45deg);
+}
+
+.from-admin::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: aqua;
+  top: 5px;
+  right: 30px;
+  transform: rotate(45deg);
+}

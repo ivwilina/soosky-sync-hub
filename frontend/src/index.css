@@ -15,5 +15,5 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background-color: var(--secondary-invert-color);
+  background-color: var(--primary-bg-color);
 }

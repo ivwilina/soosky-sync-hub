@@ -4,12 +4,23 @@ import "./letterMini.css";
 /*-----------------------------------------------------------------------------------------*/
 
 interface LetterMiniProps {
+  id: string;
   title: string;
   time: string;
   status: string;
+  onClick: (id: string) => void;
 }
 
-const LetterMini: React.FC<LetterMiniProps> = ({ title, time, status }) => {
+const LetterMini: React.FC<LetterMiniProps> = ({
+  id,
+  title,
+  time,
+  status,
+  onClick,
+}) => {
+  const handleLetterMiniClick = () => {
+    onClick(id);
+  }
   let letterMiniStatusStyle;
   switch (status) {
     case "pending":
@@ -40,13 +51,13 @@ const LetterMini: React.FC<LetterMiniProps> = ({ title, time, status }) => {
 
   return (
     <>
-      <div className="lettermini-wrapper">
+      <div className="lettermini-wrapper" id={id} onClick={handleLetterMiniClick}>
         <div className={"lettermini-container " + letterMiniStatusStyle}>
           <h4>{title}</h4>
           <div className="lettermini-details">
             <div className="lettermini-timestamp">
-              <span>{letterMiniDateOnly}</span>
               <span>{letterMiniTimeOnly}</span>
+              <span>{letterMiniDateOnly}</span>
             </div>
             <div className="lettermini-status">{status}</div>
           </div>

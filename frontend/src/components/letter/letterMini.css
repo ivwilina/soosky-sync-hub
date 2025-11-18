@@ -21,12 +21,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .lettermini-timestamp {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  color: var(--secondary-invert-color)
 }
 
 .lettermini-status {
