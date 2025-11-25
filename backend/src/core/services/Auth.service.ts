@@ -1,32 +1,28 @@
-import { User, IUser } from "../mongodb/models/User.model";
-import bcrypt from "bcrypt";
-import { ControllerOutput } from "./Controller";
+import AuthAdapter from "../adapters/Auth.adapter";
+import UserAdapter from "../adapters/User.adapter";
 
 /*-----------------------------------------------------------------------------------------*/
 
 export default class AuthServices {
+  private readonly _authAdapter = new AuthAdapter();
+  private readonly _userAdapter = new UserAdapter();
   public async login(email: string, password: string): Promise<any> {
-    const output: ControllerOutput<string> = {
-      returnStatus: false,
-      returnMessage: "Incorrect email or password",
-      data: null,
-    };
-    try {
-      const user = await User.findOne({ email: email });
-      if (user) {
-        const passwordMatch = await bcrypt.compare(password, user.password);
-        if (passwordMatch) {
-          output.returnStatus = true;
-          output.returnMessage = "Login successfully";
-          output.data = user._id.toString();
-          return output;
-        }
-        return output;
-      }
-      return output;
-    } catch (error) {
-      output.returnMessage = error.message;
-      return output;
-    }
+    const isValid = await this._authAdapter.checkPassword(email, password);
+    if (isValid) {
+      const user = await this._userAdapter.getUserByEmail(email);
+      const jwtToken = await this._authAdapter.generateToken(
+        user._id.toString(),
+        user.permission
+      );
+      return {
+        userId: user._id,
+        userName: user.name,
+        permission: user.permission,
+        token: jwtToken,
+      };
+    } else
+      return {
+        message: "Email or Password is incorrect",
+      };
   }
 }

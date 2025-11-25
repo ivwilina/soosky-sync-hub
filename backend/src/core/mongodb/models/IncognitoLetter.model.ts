@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -19,7 +19,7 @@ interface IReply {
   createAt: string;
 }
 
-interface IIncognitoLetter {
+interface IIncognitoLetter extends Document {
   author: IAuthor;
   status: Status;
   reply: [IReply];
@@ -36,14 +36,11 @@ const authorSchema = new Schema<IAuthor>(
   { _id: false }
 );
 
-const replySchema = new Schema<IReply>(
-  {
-    author: authorSchema,
-    content: { type: String, required: true },
-    createAt: { type: String, required: true },
-  },
-  { _id: false }
-);
+const replySchema = new Schema<IReply>({
+  author: authorSchema,
+  content: { type: String, required: true },
+  createAt: { type: String, required: true },
+});
 
 const incognitoLetterSchema = new Schema<IIncognitoLetter>({
   author: authorSchema,

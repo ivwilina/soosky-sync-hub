@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model , Document} from "mongoose";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -7,7 +7,7 @@ enum Permission {
   Emp = "employee",
 }
 
-interface IUser {
+interface IUser extends Document{
   name: string;
   email: string;
   password: string;
@@ -17,7 +17,7 @@ interface IUser {
 
 const userSchema = new Schema<IUser>({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   permission: { type: String, default: Permission.Emp },
   createAt: {type: String, required: true}
