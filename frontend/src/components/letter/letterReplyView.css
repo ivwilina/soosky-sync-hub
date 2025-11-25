@@ -1,0 +1,94 @@
+.letterreply-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.letterreply-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 65%;
+  margin: 0 15px;
+  padding: 10px 20px 10px 10px;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.letterreply-author {
+  font-style: italic;
+  color: var(--primary-invert-color);
+  background-color: var(--primary-color);
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.letterreply-content {
+  font-size: 1rem;
+}
+
+.from-user {
+  align-items: flex-start;
+}
+
+.from-admin {
+  align-items: flex-end;
+}
+
+.from-user .letterreply-container {
+  background-color: var(--primary-border-color);
+}
+
+.from-admin .letterreply-container {
+  background-color: var(--primary-fg-color);
+}
+
+.letterreply-timestamp {
+  color: var(--secondary-invert-color);
+  animation: timestamp-reveal-reverse 0.1s forwards linear;
+}
+
+.letterreply-container:hover .letterreply-timestamp {
+  animation: timestamp-reveal 0.1s forwards linear;
+}
+
+@keyframes timestamp-reveal {
+  from {
+    font-size: 0rem;
+  }
+  to {
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes timestamp-reveal-reverse {
+  from {
+    font-size: 0.9rem;
+  }
+  to {
+    font-size: 0rem;
+  }
+}
+
+/* .from-user::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-border-color);
+  bottom: 30px;
+  left: 10px;
+  transform: rotate(45deg);
+}
+
+.from-admin::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-fg-color);
+  top: 30px;
+  right: 10px;
+  transform: rotate(45deg);
+} */
