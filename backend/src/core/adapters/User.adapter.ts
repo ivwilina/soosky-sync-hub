@@ -61,7 +61,7 @@ export default class UserAdapter {
   }
 
   public async checkEmailExistence(email: string): Promise<boolean> {
-    const user = await User.find({ email: email });
+    const user = await User.findOne({ email: email });
     if (user) return true;
     else return false;
   }

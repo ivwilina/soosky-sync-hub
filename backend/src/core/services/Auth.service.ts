@@ -22,7 +22,7 @@ export default class AuthServices {
       };
     } else
       return {
-        message: "Email or Password is incorrect",
+        errmsg: "Email or Password is incorrect",
       };
   }
 }

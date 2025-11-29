@@ -26,7 +26,7 @@ const Login = () => {
   }
 
   const handleLogin = (e: React.FormEvent) => {
-    console.log("nihaoma")
+
     e.preventDefault();
 
     if (username === "admin@email.com" && password === "password") {

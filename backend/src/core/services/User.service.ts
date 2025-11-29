@@ -24,13 +24,13 @@ export default class UserServices {
         userName
       );
       return createdUser;
-    } else return { message: "Email existed" };
+    } else return { errmsg: "Email existed" };
   }
 
   public async deleteUsers(userId: string[]): Promise<any> {
     const output = await this._userAdapter.deleteUser(userId);
     if (output) return { message: "Delete successfully" };
-    else return { message: "Delete failed" };
+    else return { errmsg: "Delete failed" };
   }
 
   public async modifyUserInfomation(

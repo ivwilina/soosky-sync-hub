@@ -4,8 +4,10 @@ type UserRole = "guest" | "employee" | "admin";
 
 interface IAuthContext {
   userRole: UserRole;
+  jwt: string,
+  user: object,
   isAuthenticated: boolean;
-  login: (role: "admin" | "employee") => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
 }
 

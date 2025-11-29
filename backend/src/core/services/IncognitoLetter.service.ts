@@ -65,6 +65,6 @@ export default class IncognitoLetterServices {
   public async deleteLetter(letterId: string[]): Promise<any> {
     const output = await this._letterAdapter.deleteIncognitoLetter(letterId);
     if (output) return { message: "Delete successfully" };
-    else return { message: "Delete failed" };
+    else return { errmsg: "Delete failed" };
   }
 }
