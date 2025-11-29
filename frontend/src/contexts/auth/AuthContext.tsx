@@ -7,6 +7,7 @@ interface IAuthContext {
   jwt: string,
   user: object,
   isAuthenticated: boolean;
+  isLoading: boolean
   login: (email: string, password: string) => void;
   logout: () => void;
 }

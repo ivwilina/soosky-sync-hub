@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 import {} from "module";
 import _userManagementModule_user from "../modules/userManagement/User.routes";
 import _userManagementModule_admin from "../modules/userManagement/Admin.routes";
@@ -57,6 +56,8 @@ export default class Server {
   }
 
   private _registerMiddlewares() {
+    // **NOTE: cors
+    this._server.use(cors());
     this._server.use(express.json());
   }
 

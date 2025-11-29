@@ -1,5 +1,6 @@
 import React from 'react'
 import "./navigationBarRoute.css";
+import { Link } from 'react-router-dom';
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -10,15 +11,15 @@ interface NavigationBarRoute {
 }
 
 
-const NavigationBarRoute:React.FC<NavigationBarRoute> = ({label, icon}) => {
+const NavigationBarRoute:React.FC<NavigationBarRoute> = ({label, icon, route}) => {
   return (
     <>
-      <div className="navbar-route-wrapper">
+      <Link to={route} className="navbar-route-wrapper">
         <div className="navbar-route-container">
           <img src={icon} alt={label + " icon"} />
           <span>{label}</span>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

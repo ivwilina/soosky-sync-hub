@@ -1,4 +1,3 @@
-import React from "react";
 import NavigationBarRoute from "./NavigationBarRoute";
 import "./navigationBar.css";
 
@@ -15,8 +14,8 @@ const NavigationBar = () => {
       <div className="navbar-wrapper">
         <div className="navbar-container">
           <div className="navbar-routes">
-            <NavigationBarRoute label="home" icon={HomeRouteIcon} route="#" />
-            <NavigationBarRoute label="q&a" icon={QnARouteIcon} route="#" />
+            <NavigationBarRoute label="home" icon={HomeRouteIcon} route="dashboard" />
+            <NavigationBarRoute label="q&a" icon={QnARouteIcon} route="incognito-letter" />
             <NavigationBarRoute label="menu" icon={MenuRouteIcon} route="#" />
           </div>
           <div className="navbar-routes">

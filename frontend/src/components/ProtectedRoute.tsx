@@ -9,17 +9,22 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) => {
-  const { isAuthenticated, userRole } = useAuth();
+  const { isAuthenticated, userRole, isLoading } = useAuth();
+
+  if(isLoading) {
+    return <div> Loading ...</div>
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
-  }
-  const userHasPermission = allowedRoles
-    ? allowedRoles.includes(userRole as AllowedRole)
-    : true;
+  } else {
+    const userHasPermission = allowedRoles
+      ? allowedRoles.includes(userRole as AllowedRole)
+      : true;
 
-  if (!userHasPermission) {
-    return <Navigate to="/" replace />;
+    if (!userHasPermission) {
+      return <Navigate to="/" replace />;
+    }
   }
   return <Outlet />;
 };

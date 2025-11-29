@@ -9,35 +9,22 @@ const Login = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  if(isAuthenticated) navigate("/dashboard", { replace: true });
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value)
-  }
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
-  if (isAuthenticated) {
-    navigate("/dashboard", { replace: true });
-    return null;
-  }
-
-  const handleLogin = (e: React.FormEvent) => {
-
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (username === "admin@email.com" && password === "password") {
-      login("admin");
-      navigate("/dashboard", { replace: true });
-    } else if (username === "employee@email.com" && password === "password") {
-      login("employee");
-      navigate("/dashboard", { replace: true });
-    } else {
-      alert("Invalid credentials");
-    }
+    await login(email, password);
   };
 
   return (
@@ -49,10 +36,10 @@ const Login = () => {
             <span>email</span>
             <input
               type="email"
-              value={username}
+              value={email}
               id="login-email"
               placeholder="example@email.com"
-              onChange={handleUsernameChange}
+              onChange={handleEmailChange}
             />
           </div>
           <div className="login-input-container">
