@@ -15,7 +15,6 @@ export default class UserAdapter {
       email: email,
       name: name,
       password: newHashedPassword,
-      createAt: new Date().toISOString(),
     });
     return {
       email: email,

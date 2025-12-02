@@ -20,7 +20,6 @@ export default class IncognitoLetterAdapter {
       author: newAuthor,
       title: letterTitle,
       content: letterContent,
-      createdAt: new Date().toISOString(),
     });
     return newIncognitoLetter;
   }
@@ -88,7 +87,6 @@ export default class IncognitoLetterAdapter {
       const newReply: IReply = {
         author: replyAuthor,
         content: replyMessage,
-        createAt: new Date().toISOString(),
       };
       const letter = await IncognitoLetter.findById(letterId);
       if (letter.reply) {

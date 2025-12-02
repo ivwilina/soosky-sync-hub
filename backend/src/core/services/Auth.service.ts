@@ -15,13 +15,16 @@ export default class AuthServices {
         user.permission
       );
       return {
-        userId: user._id,
-        userName: user.name,
-        permission: user.permission,
-        token: jwtToken,
+        status: 200,
+        data: {
+          userId: user._id,
+          userName: user.name,
+          permission: user.permission,
+          token: jwtToken,
+        },
       };
     } else
-      return {
+      return { status: 401,
         errmsg: "Email or Password is incorrect",
       };
   }

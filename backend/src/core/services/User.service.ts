@@ -1,4 +1,3 @@
-import { User, IUser } from "../mongodb/models/User.model";
 import bcrypt from "bcrypt";
 import shitty from "../../configs/ShittyConfig";
 import UserAdapter from "../adapters/User.adapter";
@@ -23,13 +22,13 @@ export default class UserServices {
         userEmail,
         userName
       );
-      return createdUser;
+      return {status: 201, data: createdUser};
     } else return { errmsg: "Email existed" };
   }
 
   public async deleteUsers(userId: string[]): Promise<any> {
     const output = await this._userAdapter.deleteUser(userId);
-    if (output) return { message: "Delete successfully" };
+    if (output) return {status: 200, data: "Delete successfully" };
     else return { errmsg: "Delete failed" };
   }
 
@@ -41,7 +40,7 @@ export default class UserServices {
       userId,
       ...infomation
     );
-    return updatedUser;
+    return {status: 200, data: updatedUser};
   }
 
   public async changeAccountPassword(
@@ -56,7 +55,8 @@ export default class UserServices {
     if (passwordMatch) {
       const newHashedPassword = bcrypt.hash(newPassword, this._saltRound);
       const updatedUser = await this._userAdapter.updateUser(userId, {password: newHashedPassword});
-      return updatedUser;
+      return {status: 200, data: updatedUser};
     }
+    else return {status: 400, errmsg: "Old password is incorrect" };
   }
 }

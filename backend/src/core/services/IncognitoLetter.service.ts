@@ -1,10 +1,4 @@
 import IncognitoLetterAdapter from "../adapters/IncognitoLetter.adapter";
-import {
-  IncognitoLetter,
-  IIncognitoLetter,
-  IAuthor,
-  IReply,
-} from "../mongodb/models/IncognitoLetter.model";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -23,17 +17,19 @@ export default class IncognitoLetterServices {
       letterTitle,
       letterContent
     );
-    return createdLetter;
+    return { status: 201, data: createdLetter };
   }
 
   public async getIncognitoLetters(userId?: string): Promise<any> {
     const letters = await this._letterAdapter.getIncognitoLetter(userId);
-    return letters;
+    if (letters === null) return { status: 204, data: [] };
+    return { status: 200, data: letters };
   }
 
   public async getIncognitoLetter(letterId: string): Promise<any> {
     const letter = await this._letterAdapter.readIncognitoLetter(letterId);
-    return letter;
+    if (letter === null) return { status: 404, data: null };
+    return { status: 200, data: letter };
   }
 
   public async modifyIncognitoLetterStatus(
@@ -44,7 +40,7 @@ export default class IncognitoLetterServices {
       letterId,
       { status: status }
     );
-    return updatedLetter;
+    return {status: 200 , data: updatedLetter};
   }
 
   public async addReplyWithinAnIncognitoLetter(
@@ -59,12 +55,12 @@ export default class IncognitoLetterServices {
       userName,
       replyMessage
     );
-    return updatedLetter
+    return {status: 201, data: updatedLetter};
   }
 
   public async deleteLetter(letterId: string[]): Promise<any> {
     const output = await this._letterAdapter.deleteIncognitoLetter(letterId);
-    if (output) return { message: "Delete successfully" };
-    else return { errmsg: "Delete failed" };
+    if (output) return {status: 200, data: "Delete successfully" };
+    else return {status: 400, errmsg: "Delete failed" };
   }
 }
