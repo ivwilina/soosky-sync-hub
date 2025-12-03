@@ -23,7 +23,7 @@ interface IReply {
 interface IIncognitoLetter extends Document {
   author: IAuthor;
   status: Status;
-  reply: [IReply];
+  reply: IReply[];
   title: string;
   content: string;
   createdAt?: string;
@@ -49,8 +49,12 @@ const replySchema = new Schema<IReply>(
 const incognitoLetterSchema = new Schema<IIncognitoLetter>(
   {
     author: authorSchema,
-    status: { type: String, default: Status.Pending },
-    reply: replySchema,
+    status: {
+      type: String,
+      enum: Object.values(Status),
+      default: Status.Pending,
+    },
+    reply: [replySchema],
     title: { type: String, required: true },
     content: { type: String, required: true },
   },
@@ -64,4 +68,4 @@ const IncognitoLetter = model<IIncognitoLetter>(
   incognitoLetterSchema
 );
 
-export { IncognitoLetter, IIncognitoLetter, IAuthor, IReply };
+export { IncognitoLetter, IIncognitoLetter, IAuthor, IReply, Status };
