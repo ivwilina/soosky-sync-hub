@@ -7,8 +7,10 @@ import HomeRouteIcon from "../../assets/icons/home.svg";
 import QnARouteIcon from "../../assets/icons/qna.svg";
 import MenuRouteIcon from "../../assets/icons/menu.svg";
 import ProfileRouteIcon from "../../assets/icons/profile.svg";
+import { useAuth } from "../../contexts/auth/useAuth";
 
 const NavigationBar = () => {
+  const {logout} = useAuth();
   return (
     <>
       <div className="navbar-wrapper">
@@ -19,7 +21,7 @@ const NavigationBar = () => {
             <NavigationBarRoute label="menu" icon={MenuRouteIcon} route="#" />
           </div>
           <div className="navbar-routes">
-            <NavigationBarRoute label="profile" icon={ProfileRouteIcon} route="#" />
+            <NavigationBarRoute label="profile" icon={ProfileRouteIcon} route="#" onClick={logout}/>
           </div>
         </div>
       </div>

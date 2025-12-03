@@ -1,0 +1,70 @@
+.letter-compose-wrapper {
+  background-color: var(--secondary-color);
+  margin: 1rem;
+  display: flex;
+  border-radius: 15px;
+  width: 100%;
+}
+
+.letter-compose-container {
+  background-color: var(--primary-color);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.letter-compose-container h1 {
+  margin: 0;
+}
+
+.letter-compose-container textarea {
+  padding: 10px;
+  width: calc(100%-10px);
+  overflow-y: scroll;
+  resize: none;
+  border-radius: 10px;
+}
+
+.letter-compose-container .letter-compose-input-details {
+  flex-grow: 1;
+}
+
+.letter-compose-container .letter-compose-input-title {
+  height: 3rem;
+}
+
+.letter-compose-container textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.letter-compose-container textarea::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+}
+
+.letter-compose-container textarea::-webkit-scrollbar-thumb {
+  background: var(--primary-border-color);
+  border-radius: 5px;
+}
+
+.letter-compose-container textarea::-webkit-scrollbar-button {
+  background: none;
+}
+
+.letter-compose-container button {
+  width: 100%;
+  border: none;
+  background-color: var(--primary-border-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}

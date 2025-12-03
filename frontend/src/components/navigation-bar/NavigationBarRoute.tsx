@@ -8,13 +8,14 @@ interface NavigationBarRoute {
   label: string;
   icon: string;
   route: string;
+  onClick?: () => void;
 }
 
 
-const NavigationBarRoute:React.FC<NavigationBarRoute> = ({label, icon, route}) => {
+const NavigationBarRoute:React.FC<NavigationBarRoute> = ({label, icon, route, onClick}) => {
   return (
     <>
-      <Link to={route} className="navbar-route-wrapper">
+      <Link to={route} className="navbar-route-wrapper" onClick={onClick}>
         <div className="navbar-route-container">
           <img src={icon} alt={label + " icon"} />
           <span>{label}</span>

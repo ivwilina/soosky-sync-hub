@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/letterBox.css";
 import LetterMini from "../../../components/letter/LetterMini";
 import LetterView from "../../../components/letter/LetterView";
+import LetterCompose from "../../../components/letter/LetterCompose";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -94,6 +95,24 @@ const LetterBox = () => {
     setSelectedLetterId(id);
   };
 
+  let letterView = selectedLetter ? (
+    <LetterView
+      key={selectedLetter.id}
+      id={selectedLetter.id}
+      author={selectedLetter.author}
+      title={selectedLetter.title}
+      content={selectedLetter.content}
+      createAt={selectedLetter.createAt}
+      reply={selectedLetter.reply}
+    />
+  ) : (
+    <></>
+  );
+  
+  if (selectedLetterId === "compose") {
+    letterView = <LetterCompose />;
+  }
+
   return (
     <>
       <div className="letterbox-wrapper">
@@ -111,20 +130,16 @@ const LetterBox = () => {
                 />
               ))}
             </div>
+              <div className="compose-letter-button-wrapper">
+                <button
+                  className="compose-letter-button-container"
+                  onClick={() => handleLetterMiniClick("compose")}
+                >
+                  new letter
+                </button>
+              </div>
           </div>
-          {selectedLetter ? (
-            <LetterView
-              key={selectedLetter.id}
-              id={selectedLetter.id}
-              author={selectedLetter.author}
-              title={selectedLetter.title}
-              content={selectedLetter.content}
-              createAt={selectedLetter.createAt}
-              reply={selectedLetter.reply}
-            />
-          ) : (
-            <></>
-          )}
+          {letterView}
         </div>
       </div>
     </>

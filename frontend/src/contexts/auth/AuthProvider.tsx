@@ -34,7 +34,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const userInfo: User = await apiLogin(email, password);
+    const loginData = await apiLogin(email, password);
+    const userInfo: User = loginData.data;
     if (!("errmsg" in userInfo)) {
       const newStoredUser = {
         ...userInfo,
@@ -46,7 +47,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserRole(userInfo.permission);
     }
   };
-  const logout = () => setUserRole("guest");
+  const logout = async () => {
+    localStorage.removeItem("user");
+    setUser({});
+    setIsAuthenticated(false);
+    setJwt("");
+    setUserRole("guest");
+  };
   return (
     <AuthContext.Provider
       value={{ userRole, isAuthenticated, jwt, user, login, logout, isLoading }}

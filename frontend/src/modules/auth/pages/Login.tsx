@@ -54,7 +54,7 @@ const Login = () => {
           </div>
           <div className="login-submit-container">
             <button type="submit">sign in</button>
-            <span>forget password? contact hr for support</span>
+            <span>forget password? contact hr to recover</span>
           </div>
         </div>
       </form>
