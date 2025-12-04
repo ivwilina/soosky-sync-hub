@@ -31,7 +31,7 @@ const getSelectedIncognitoLetter = async (letterId: string) => {
     id: letterId,
   });
   const response = await fetch(
-    `${ServiceCfg.baseUrl}/incognito-letter/letters/?${params.toString()}`,
+    `${ServiceCfg.baseUrl}/incognito-letter/letters/${params.toString()}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -46,7 +46,7 @@ const getAllPersonalIncognitoLetters = async (userId: string) => {
     id: userId,
   });
   const response = await fetch(
-    `${ServiceCfg.baseUrl}/incognito-letter/letters/?${params.toString()}`,
+    `${ServiceCfg.baseUrl}/incognito-letter/letters/${params.toString()}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getAllIncognitoLetters,
   getAllPersonalIncognitoLetters,
@@ -25,32 +25,109 @@ import {
 // }
 
 interface IIncognitoLetterService {
-  incognitoLettersList: object;
+  incognitoLettersList: object[];
   incognitoLetter: object;
-  sendLetter: () => void;
-  getLetter: () => void;
-  getAllLetter: () => void;
-  getAllPersonalLetters: () => void;
-  deleteLetter: () => void;
-  replyLetter: () => void;
+  sendLetter: (
+    userId: string,
+    userName: string,
+    letterTitle: string,
+    letterContent: string
+  ) => Promise<void>;
+  getLetter: (letterId: string) => Promise<void>;
+  getAllLetters: () => Promise<void>;
+  getAllPersonalLetters: (userId: string) => Promise<void>;
+  deleteLetter: (letterId: string[]) => Promise<void>;
+  replyLetter: (
+    letterId: string,
+    userId: string,
+    userName: string,
+    replyMsg: string
+  ) => Promise<void>;
 }
 
-const incognitoLetterService: IIncognitoLetterService = () => {
-  const [incognitoLettersList, setIncognitoLettersList] = useState([]);
-  const [incognitoLetter, setIncognitoLetter] = useState({});
-  const [loading, setLoading] = useState(false);
+const useIncognitoLetterService = (
+  userId: string,
+  userPermission: string,
+): IIncognitoLetterService => {
+  const [incognitoLettersList, setIncognitoLettersList] = useState<object[]>(
+    []
+  );
+  const [incognitoLetter, setIncognitoLetter] = useState<object>({});
+  const [loading, setLoading] = useState(true);
 
-  const sendLetter = async () => {};
+  const sendLetter = async (
+    userId: string,
+    userName: string,
+    letterTitle: string,
+    letterContent: string
+  ) => {
+    const res = await sendIncognitoLetter(
+      userId,
+      userName,
+      letterTitle,
+      letterContent
+    );
+    if (res.status === 201) {
+      setLoading(true);
+    }
+  };
 
-  const getLetter = async () => {};
+  const getLetter = async (letterId: string) => {
+    const res = await getSelectedIncognitoLetter(letterId);
+    if (res.status === 200) {
+      setIncognitoLetter(res.data);
+    }
+  };
 
-  const getAllLetters = async () => {};
+  const getAllLetters = async () => {
+    const res = await getAllIncognitoLetters();
+    if (res.status === 200) {
+      setIncognitoLettersList(res.data);
+      setLoading(false);
+    }
+  };
 
-  const getAllPersonalLetters = async () => {};
+  const getAllPersonalLetters = async (userId: string) => {
+    const res = await getAllPersonalIncognitoLetters(userId);
+    if (res.status === 200) {
+      setIncognitoLettersList(res.data);
+      setLoading(false);
+    }
+  };
 
-  const deleteLetter = async () => {};
+  const deleteLetter = async (letterId: string[]) => {
+    const res = await deleteIncognitoLetter(letterId);
+    if (res.status === 200) {
+      setLoading(true);
+    }
+  };
 
-  const replyLetter = async () => {};
+  const replyLetter = async (
+    letterId: string,
+    userId: string,
+    userName: string,
+    replyMsg: string
+  ) => {
+    const res = await replyAnIncognitoLetter(
+      letterId,
+      userId,
+      userName,
+      replyMsg
+    );
+    if (res.status === 200) {
+      setLoading(true);
+    }
+  };
+
+  useEffect(() => {
+    if (loading) {
+      if (userPermission === "admin") {
+        getAllLetters();
+      } else {
+        getAllPersonalLetters(userId);
+      }
+    }
+  }, [loading, userPermission, userId]);
 
   return {
     incognitoLettersList,
@@ -63,3 +140,5 @@ const incognitoLetterService: IIncognitoLetterService = () => {
     replyLetter,
   };
 };
+
+export default useIncognitoLetterService;

@@ -12,7 +12,7 @@ type User = {
 interface IAuthContext {
   userRole: UserRole;
   jwt: string,
-  user?: User,
+  user: User,
   isAuthenticated: boolean;
   isLoading: boolean
   login: (email: string, password: string) => void;

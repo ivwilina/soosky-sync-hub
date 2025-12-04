@@ -9,7 +9,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userRole, setUserRole] = useState<UserRole>("guest");
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [jwt, setJwt] = useState<string>("");
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User>({} as User);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   const logout = async () => {
     localStorage.removeItem("user");
-    setUser(undefined);
+    setUser({} as User);
     setIsAuthenticated(false);
     setJwt("");
     setUserRole("guest");

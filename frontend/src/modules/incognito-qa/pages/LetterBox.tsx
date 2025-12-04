@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "../styles/letterBox.css";
 import LetterMini from "../../../components/letter/LetterMini";
 import LetterView from "../../../components/letter/LetterView";
 import LetterCompose from "../../../components/letter/LetterCompose";
+import useIncognitoLetterService from "../services/incognitoLetter.service";
+import { useAuth } from "../../../contexts/auth/useAuth";
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -25,41 +27,6 @@ const LetterBox = () => {
         {
           author: "admin",
           content: "test reply from admin",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "admin",
-          content: "test reply from admin",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "admin",
-          content: "test reply from admin",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "user1",
-          content: "test reply 02 from user",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "user1",
-          content: "test reply 02 from user",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "user1",
-          content: "test reply 02 from user",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "user1",
-          content: "test reply 02 from user",
-          createAt: "2025-11-17T07:37:00.000Z",
-        },
-        {
-          author: "user1",
-          content: "test reply 02 from user",
           createAt: "2025-11-17T07:37:00.000Z",
         },
       ],
@@ -86,6 +53,18 @@ const LetterBox = () => {
     },
   ];
 
+  const { user } = useAuth();
+  const {
+    incognitoLettersList,
+    incognitoLetter,
+    sendLetter,
+    getLetter,
+    getAllLetters,
+    getAllPersonalLetters,
+    deleteLetter,
+    replyLetter,
+  } = useIncognitoLetterService(user.userId, user.permission);
+
   const [selectedLetterId, setSelectedLetterId] = useState<string | null>();
   const selectedLetter = testLetters.find(
     (letter) => letter.id === selectedLetterId
@@ -108,7 +87,7 @@ const LetterBox = () => {
   ) : (
     <></>
   );
-  
+
   if (selectedLetterId === "compose") {
     letterView = <LetterCompose />;
   }
@@ -130,14 +109,14 @@ const LetterBox = () => {
                 />
               ))}
             </div>
-              <div className="compose-letter-button-wrapper">
-                <button
-                  className="compose-letter-button-container"
-                  onClick={() => handleLetterMiniClick("compose")}
-                >
-                  new letter
-                </button>
-              </div>
+            <div className="compose-letter-button-wrapper">
+              <button
+                className="compose-letter-button-container"
+                onClick={() => handleLetterMiniClick("compose")}
+              >
+                new letter
+              </button>
+            </div>
           </div>
           {letterView}
         </div>
