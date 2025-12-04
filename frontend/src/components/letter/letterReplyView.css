@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: flex-end;
 }
 
 .letterreply-container {
@@ -14,6 +15,7 @@
   padding: 10px 20px 10px 10px;
   border-radius: 10px;
   gap: 10px;
+  background-color: var(--primary-fg-color);
 }
 
 .letterreply-author {
@@ -28,20 +30,12 @@
   font-size: 1rem;
 }
 
-.from-user {
+.from-you {
   align-items: flex-start;
 }
 
-.from-admin {
-  align-items: flex-end;
-}
-
-.from-user .letterreply-container {
+.from-you .letterreply-container {
   background-color: var(--primary-border-color);
-}
-
-.from-admin .letterreply-container {
-  background-color: var(--primary-fg-color);
 }
 
 .letterreply-timestamp {
@@ -70,25 +64,3 @@
     font-size: 0rem;
   }
 }
-
-/* .from-user::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--primary-border-color);
-  bottom: 30px;
-  left: 10px;
-  transform: rotate(45deg);
-}
-
-.from-admin::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--primary-fg-color);
-  top: 30px;
-  right: 10px;
-  transform: rotate(45deg);
-} */

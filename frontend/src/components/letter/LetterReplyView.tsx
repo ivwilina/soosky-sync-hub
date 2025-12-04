@@ -2,26 +2,24 @@ import React from "react";
 import "./letterReplyView.css";
 
 interface LetterReplyViewProps {
-  letterAuthor: string;
-  replyAuthor: string;
+  currentUserId: string;
+  replyAuthorId: string;
   content: string;
   createAt: string;
 }
 
 const LetterReplyView: React.FC<LetterReplyViewProps> = ({
-  letterAuthor,
-  replyAuthor,
+  currentUserId,
+  replyAuthorId,
   content,
   createAt,
 }) => {
   let replyStyle;
   let author;
-  if (letterAuthor == replyAuthor) {
-    replyStyle = "from-user";
-    author = "user";
+  if (currentUserId == replyAuthorId) {
+    replyStyle = "from-you";
   } else {
-    replyStyle = "from-admin";
-    author = "admin";
+    replyStyle = "";
   }
   const replyDate = new Date(createAt).toLocaleString([], {
     hour12: false,

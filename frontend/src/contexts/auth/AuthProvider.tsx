@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import type { UserRole } from "./AuthContext";
+import type { UserRole, User } from "./AuthContext";
 import AuthContext from "./AuthContext";
-import { login as apiLogin } from "../../apis/authApis";
+import { login as apiLogin } from "../../apis/auth.api";
 
-type User = {
-  id: string;
-  name: string;
-  token: string;
-  permission: UserRole;
-};
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userRole, setUserRole] = useState<UserRole>("guest");
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [jwt, setJwt] = useState<string>("");
-  const [user, setUser] = useState<object>({});
+  const [user, setUser] = useState<User>();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -49,7 +43,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   const logout = async () => {
     localStorage.removeItem("user");
-    setUser({});
+    setUser(undefined);
     setIsAuthenticated(false);
     setJwt("");
     setUserRole("guest");
