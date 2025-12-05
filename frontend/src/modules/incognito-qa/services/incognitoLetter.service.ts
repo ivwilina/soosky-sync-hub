@@ -8,9 +8,30 @@ import {
   sendIncognitoLetter,
 } from "../../../apis/incognitoLetter.api";
 
-// type IncognitoLetter = {
-
-// }
+type IncognitoLetter = {
+  _id: string;
+  author: {
+    userId: string;
+    name: string;
+  };
+  status: string;
+  title: string;
+  content: string;
+  reply?: [
+    {
+      author: {
+        userId: string;
+        name: string;
+      };
+      content: string;
+      _id: string;
+      createdAt: string;
+      updatedAt: string;
+    }
+  ];
+  createdAt: string;
+  updatedAt: string;
+};
 
 // type NewIncognitoLetter = {
 
@@ -25,8 +46,8 @@ import {
 // }
 
 interface IIncognitoLetterService {
-  incognitoLettersList: object[];
-  incognitoLetter: object;
+  incognitoLettersList: IncognitoLetter[];
+  incognitoLetter: IncognitoLetter;
   sendLetter: (
     userId: string,
     userName: string,
@@ -47,12 +68,14 @@ interface IIncognitoLetterService {
 
 const useIncognitoLetterService = (
   userId: string,
-  userPermission: string,
+  userPermission: string
 ): IIncognitoLetterService => {
-  const [incognitoLettersList, setIncognitoLettersList] = useState<object[]>(
-    []
+  const [incognitoLettersList, setIncognitoLettersList] = useState<
+    IncognitoLetter[]
+  >([]);
+  const [incognitoLetter, setIncognitoLetter] = useState<IncognitoLetter>(
+    {} as IncognitoLetter
   );
-  const [incognitoLetter, setIncognitoLetter] = useState<object>({});
   const [loading, setLoading] = useState(true);
 
   const sendLetter = async (
@@ -116,6 +139,7 @@ const useIncognitoLetterService = (
     );
     if (res.status === 200) {
       setLoading(true);
+      await getAllPersonalIncognitoLetters(userId)
     }
   };
 
@@ -142,3 +166,5 @@ const useIncognitoLetterService = (
 };
 
 export default useIncognitoLetterService;
+
+export type { IncognitoLetter};

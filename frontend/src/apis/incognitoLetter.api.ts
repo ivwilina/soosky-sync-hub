@@ -74,13 +74,15 @@ const replyAnIncognitoLetter = async (
   userName: string,
   replyMsg: string
 ) => {
+  const params: URLSearchParams = new URLSearchParams({
+    id: letterId,
+  });
   const response = await fetch(
-    `${ServiceCfg.baseUrl}/incognito-letter/admin/letters`,
+    `${ServiceCfg.baseUrl}/incognito-letter/letters/${params.get("id")}`,
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: letterId,
         userId: userId,
         userName: userName,
         replyMsg: replyMsg,

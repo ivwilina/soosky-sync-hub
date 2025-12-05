@@ -92,7 +92,7 @@ export default class IncognitoLetterAdapter {
       if (letter.reply) {
         const letterReply: IReply[] = letter.reply;
         letterReply.push(newReply);
-        await IncognitoLetter.findByIdAndUpdate(letterId, { reply: newReply });
+        await IncognitoLetter.findByIdAndUpdate(letterId, { reply: letterReply });
         const updatedLetter = await IncognitoLetter.findById(letterId);
         return updatedLetter;
       } else {

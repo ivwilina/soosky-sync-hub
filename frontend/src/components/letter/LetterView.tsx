@@ -1,29 +1,45 @@
-import React from "react";
+import React, { useState, type ChangeEvent } from "react";
 import "./letterView.css";
 import LetterReplyView from "./LetterReplyView";
-import SendIcon from "../../assets/icons/send.svg"
+import SendIcon from "../../assets/icons/send.svg";
 
 type Reply = {
-  author: string;
+  author: {
+    userId: string;
+    name: string;
+  };
   content: string;
-  createAt: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
 };
 interface LetterViewProps {
+  currentUserId: string;
+  currentUserName: string;
   id: string;
   author: string;
   title: string;
   content: string;
   createAt: string;
   reply?: Reply[];
+  postReply: (
+    letterId: string,
+    userId: string,
+    userName: string,
+    replyMsg: string
+  ) => void;
 }
 
 const LetterView: React.FC<LetterViewProps> = ({
+  currentUserId,
+  currentUserName,
   id,
   author,
   title,
   content,
   createAt,
   reply,
+  postReply,
 }) => {
   const letterSendDate = new Date(createAt).toLocaleString([], {
     hour12: false,
@@ -33,6 +49,16 @@ const LetterView: React.FC<LetterViewProps> = ({
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  const [replyInput, setReplyInput] = useState("");
+
+  const handlePostReply = async () => {
+    await postReply(id, currentUserId, currentUserName, replyInput)
+  };
+
+  const handleReplyInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setReplyInput(e.target.value);
+  };
 
   return (
     <>
@@ -45,20 +71,25 @@ const LetterView: React.FC<LetterViewProps> = ({
           <div className="letterview-content">
             <p>{content}</p>
             <div className="letterview-reply-list">
-              {reply?.map((r) => (
+              {reply?.map((r: Reply) => (
                 <LetterReplyView
-                  key={id + "replyView"}
-                  letterAuthor={author}
-                  replyAuthor={r.author}
+                  key={r._id}
+                  currentUser={currentUserId}
+                  author={author}
                   content={r.content}
-                  createAt={r.createAt}
+                  createAt={r.createdAt}
                 />
               ))}
             </div>
           </div>
           <div className="letterview-reply-compose">
-            <input type="text" name="" id="reply-input-field" placeholder="write a reply here"/>
-            <button>
+            <input
+              type="text"
+              id="reply-input-field"
+              placeholder="write a reply here"
+              onChange={handleReplyInput}
+            />
+            <button onClick={handlePostReply}>
               <img src={SendIcon} alt="send" />
               send
             </button>

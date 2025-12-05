@@ -3,6 +3,7 @@
   margin: 1rem;
   display: flex;
   border-radius: 15px;
+  flex-grow: 1;
 }
 
 .letterview-container {
@@ -10,6 +11,7 @@
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
+  width: 100%;
 }
 
 .letterview-container {
@@ -48,12 +50,13 @@
   text-align: justify;
   font-size: 1rem;
   max-height: 40%;
+  min-height: 20%;
   overflow-y: scroll;
   padding: 0 1rem;
 }
 
 .letterview-reply-list {
-  height: 50%;
+  flex-grow: 1;
   border-top: 1px solid var(--primary-invert-color);
   padding: 1rem 0;
   display: flex;

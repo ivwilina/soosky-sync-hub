@@ -2,21 +2,20 @@ import React from "react";
 import "./letterReplyView.css";
 
 interface LetterReplyViewProps {
-  currentUserId: string;
-  replyAuthorId: string;
+  currentUser: string;
+  author: string;
   content: string;
   createAt: string;
 }
 
 const LetterReplyView: React.FC<LetterReplyViewProps> = ({
-  currentUserId,
-  replyAuthorId,
+  currentUser,
+  author,
   content,
   createAt,
 }) => {
   let replyStyle;
-  let author;
-  if (currentUserId == replyAuthorId) {
+  if (currentUser == author) {
     replyStyle = "from-you";
   } else {
     replyStyle = "";
@@ -34,7 +33,6 @@ const LetterReplyView: React.FC<LetterReplyViewProps> = ({
     <>
       <div className={"letterreply-wrapper " + replyStyle}>
         <div className="letterreply-container">
-          <div className="letterreply-author">{author}</div>
           <div className="letterreply-content">{content}</div>
         <div className="letterreply-timestamp">{replyDate}</div>
         </div>
