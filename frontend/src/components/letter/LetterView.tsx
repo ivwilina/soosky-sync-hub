@@ -17,7 +17,6 @@ interface LetterViewProps {
   currentUserId: string;
   currentUserName: string;
   id: string;
-  author: string;
   title: string;
   content: string;
   createAt: string;
@@ -34,7 +33,6 @@ const LetterView: React.FC<LetterViewProps> = ({
   currentUserId,
   currentUserName,
   id,
-  author,
   title,
   content,
   createAt,
@@ -53,7 +51,8 @@ const LetterView: React.FC<LetterViewProps> = ({
   const [replyInput, setReplyInput] = useState("");
 
   const handlePostReply = async () => {
-    await postReply(id, currentUserId, currentUserName, replyInput)
+    await postReply(id, currentUserId, currentUserName, replyInput);
+    setReplyInput("");
   };
 
   const handleReplyInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +74,7 @@ const LetterView: React.FC<LetterViewProps> = ({
                 <LetterReplyView
                   key={r._id}
                   currentUser={currentUserId}
-                  author={author}
+                  author={r.author.userId}
                   content={r.content}
                   createAt={r.createdAt}
                 />
@@ -87,6 +86,7 @@ const LetterView: React.FC<LetterViewProps> = ({
               type="text"
               id="reply-input-field"
               placeholder="write a reply here"
+              value={replyInput}
               onChange={handleReplyInput}
             />
             <button onClick={handlePostReply}>

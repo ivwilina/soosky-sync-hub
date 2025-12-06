@@ -10,6 +10,6 @@ export default class AuthRoutes {
     const email = req.body.email;
     const password = req.body.password;
     const output = await this._authService.login(email, password);
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 }

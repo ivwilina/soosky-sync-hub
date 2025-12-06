@@ -25,7 +25,7 @@ export default class AuthServices {
       };
     } else
       return { status: 401,
-        errmsg: "Email or Password is incorrect",
+        data: {errmsg: "Email or Password is incorrect"},
       };
   }
 }

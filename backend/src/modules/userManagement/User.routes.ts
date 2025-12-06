@@ -16,7 +16,7 @@ export default class UserManagement_UserRoutes{
     res: Response
   ): Promise<any> {
     const output = await this._userService.getUsers(req.params.id);
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 
   private async _PUT_updatePersonalInformation(
@@ -28,7 +28,7 @@ export default class UserManagement_UserRoutes{
       req.params.id,
       updateInformation
     );
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 
   private async _PUT_changeAccountPassword(
@@ -42,6 +42,6 @@ export default class UserManagement_UserRoutes{
       oldPassword,
       newPassword
     );
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 }

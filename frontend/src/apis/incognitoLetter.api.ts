@@ -22,8 +22,8 @@ const sendIncognitoLetter = async (
     }
   );
 
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 const getSelectedIncognitoLetter = async (letterId: string) => {
@@ -37,8 +37,8 @@ const getSelectedIncognitoLetter = async (letterId: string) => {
       headers: { "Content-Type": "application/json" },
     }
   );
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 const getAllPersonalIncognitoLetters = async (userId: string) => {
@@ -52,8 +52,8 @@ const getAllPersonalIncognitoLetters = async (userId: string) => {
       headers: { "Content-Type": "application/json" },
     }
   );
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 const getAllIncognitoLetters = async () => {
@@ -64,8 +64,8 @@ const getAllIncognitoLetters = async () => {
       headers: { "Content-Type": "application/json" },
     }
   );
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 const replyAnIncognitoLetter = async (
@@ -89,8 +89,8 @@ const replyAnIncognitoLetter = async (
       }),
     }
   );
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
 
 const deleteIncognitoLetter = async (letterId: string[]) => {
@@ -104,9 +104,25 @@ const deleteIncognitoLetter = async (letterId: string[]) => {
       }),
     }
   );
-  const data = await response.json();
-  return data;
+  const res = await response.json();
+  return res;
 };
+
+const changeIncognitoLetterStatus = async(letterId: string, status: string) => {
+  const response = await fetch(
+    `${ServiceCfg.baseUrl}/incognito-letter/admin/letter/status`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        letterId: letterId,
+        status: status
+      }),
+    }
+  );
+  const res = await response.json();
+  return res;
+}
 
 export {
   sendIncognitoLetter,
@@ -115,4 +131,5 @@ export {
   getAllPersonalIncognitoLetters,
   replyAnIncognitoLetter,
   deleteIncognitoLetter,
+  changeIncognitoLetterStatus
 };

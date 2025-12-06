@@ -4,52 +4,75 @@ import LetterMini from "../../../components/letter/LetterMini";
 import LetterView from "../../../components/letter/LetterView";
 import LetterCompose from "../../../components/letter/LetterCompose";
 import useIncognitoLetterService from "../services/incognitoLetter.service";
-import type { IncognitoLetter} from "../services/incognitoLetter.service";
+import type { IncognitoLetter } from "../services/incognitoLetter.service";
 import { useAuth } from "../../../contexts/auth/useAuth";
 
 /*-----------------------------------------------------------------------------------------*/
 
 const LetterBox = () => {
+  // handle page rendering & event
   const { user } = useAuth();
-  const {
-    incognitoLettersList,
-    incognitoLetter,
-    sendLetter,
-    getLetter,
-    getAllLetters,
-    getAllPersonalLetters,
-    deleteLetter,
-    replyLetter,
-  } = useIncognitoLetterService(user.userId, user.permission);
+  const { incognitoLettersList, sendLetter, replyLetter, changeLetterStatus } =
+    useIncognitoLetterService(user.userId, user.permission);
 
   const [selectedLetterId, setSelectedLetterId] = useState<string | null>("");
   const selectedLetter: IncognitoLetter | undefined = incognitoLettersList.find(
     (letter) => letter._id === selectedLetterId
   );
 
-  const handleLetterMiniClick = (_id: string) => {
+  const handleLetterMiniClick = async (_id: string) => {
     setSelectedLetterId(_id);
+    const tempSelectedLetter = incognitoLettersList.find(
+      (letter) => letter._id === selectedLetterId
+    );
+    if (
+      tempSelectedLetter?.status === "pending" &&
+      user.permission === "admin"
+    ) {
+      await changeLetterStatus(_id, "read");
+    }
   };
 
+  // handle reply a letter
+  const handlePostReply = async (
+    letterId: string,
+    userId: string,
+    userName: string,
+    replyMsg: string
+  ) => {
+    if (user.permission === "admin") {
+      await changeLetterStatus(letterId, "replied");
+      await replyLetter(letterId, userId, userName, replyMsg);
+    } else {
+      await replyLetter(letterId, userId, userName, replyMsg);
+    }
+  };
+
+  // handle which letter will be displayed
   let letterView = selectedLetter ? (
     <LetterView
       currentUserId={user.userId}
       currentUserName={user.userName}
       key={selectedLetter._id}
       id={selectedLetter._id}
-      author={selectedLetter.author.userId}
       title={selectedLetter.title}
       content={selectedLetter.content}
       createAt={selectedLetter.createdAt}
       reply={selectedLetter.reply}
-      postReply={replyLetter}
+      postReply={handlePostReply}
     />
   ) : (
-    <></>
+    <div className="letterview-placeholder"></div>
   );
 
   if (selectedLetterId === "compose") {
-    letterView = <LetterCompose />;
+    letterView = (
+      <LetterCompose
+        currentUserId={user.userId}
+        currentUserName={user.userName}
+        postLetter={sendLetter}
+      />
+    );
   }
 
   return (
@@ -69,14 +92,18 @@ const LetterBox = () => {
                 />
               ))}
             </div>
-            <div className="compose-letter-button-wrapper">
-              <button
-                className="compose-letter-button-container"
-                onClick={() => handleLetterMiniClick("compose")}
-              >
-                new letter
-              </button>
-            </div>
+            {!(user.permission === "admin") ? (
+              <div className="compose-letter-button-wrapper">
+                <button
+                  className="compose-letter-button-container"
+                  onClick={() => handleLetterMiniClick("compose")}
+                >
+                  new letter
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           {letterView}
         </div>

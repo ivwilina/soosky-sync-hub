@@ -12,7 +12,7 @@ export default class UserServices {
 
   public async getUsers(userId?: string): Promise<any> {
     const users = await this._userAdapter.readUsers(userId);
-    return users;
+    return { status: 200, data: users };
   }
 
   public async createUser(userName: string, userEmail: string): Promise<any> {
@@ -22,14 +22,14 @@ export default class UserServices {
         userEmail,
         userName
       );
-      return {status: 201, data: createdUser};
-    } else return { errmsg: "Email existed" };
+      return { status: 201, data: createdUser };
+    } else return { status: 400, data: { errmsg: "Email existed" } };
   }
 
   public async deleteUsers(userId: string[]): Promise<any> {
     const output = await this._userAdapter.deleteUser(userId);
-    if (output) return {status: 200, data: "Delete successfully" };
-    else return { errmsg: "Delete failed" };
+    if (output) return { status: 200, data: "Delete successfully" };
+    else return { status: 400, data: { errmsg: "Delete failed" } };
   }
 
   public async modifyUserInfomation(
@@ -40,7 +40,7 @@ export default class UserServices {
       userId,
       ...infomation
     );
-    return {status: 200, data: updatedUser};
+    return { status: 200, data: updatedUser };
   }
 
   public async changeAccountPassword(
@@ -54,9 +54,10 @@ export default class UserServices {
     );
     if (passwordMatch) {
       const newHashedPassword = bcrypt.hash(newPassword, this._saltRound);
-      const updatedUser = await this._userAdapter.updateUser(userId, {password: newHashedPassword});
-      return {status: 200, data: updatedUser};
-    }
-    else return {status: 400, errmsg: "Old password is incorrect" };
+      const updatedUser = await this._userAdapter.updateUser(userId, {
+        password: newHashedPassword,
+      });
+      return { status: 200, data: updatedUser };
+    } else return { status: 400, errmsg: "Old password is incorrect" };
   }
 }

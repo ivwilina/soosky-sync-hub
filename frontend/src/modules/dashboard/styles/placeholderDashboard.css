@@ -3,18 +3,16 @@
   width: 100%;
   display: flex;
   overflow: hidden;
+  padding: 1rem;
+  background-color: var(--secondary-color);
 }
 
 .dashboard-container {
   display: flex;
   width: 100%;
-  /* height: 100%; */
-  margin: 15px 15px 15px 0px;
-  border-radius: 15px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--secondary-color);
   font-size: 3rem;
   gap: 2rem;
 }

@@ -59,7 +59,7 @@ const LetterMini: React.FC<LetterMiniProps> = ({
               <span>{letterMiniTimeOnly}</span>
               <span>{letterMiniDateOnly}</span>
             </div>
-            <div className="lettermini-status">{status}</div>
+            <div className="lettermini-status"></div>
           </div>
         </div>
       </div>

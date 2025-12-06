@@ -5,10 +5,14 @@ import { Outlet } from "react-router-dom";
 /*-----------------------------------------------------------------------------------------*/
 
 function App() {
-  return <>
-    <NavigationBar/>
-    <Outlet/>
-  </>;
+  return (
+    <>
+      <div className="sizedView">
+        <NavigationBar />
+        <Outlet />
+      </div>
+    </>
+  );
 }
 
 export default App;

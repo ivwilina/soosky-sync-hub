@@ -15,7 +15,7 @@ const LetterReplyView: React.FC<LetterReplyViewProps> = ({
   createAt,
 }) => {
   let replyStyle;
-  if (currentUser == author) {
+  if (currentUser === author) {
     replyStyle = "from-you";
   } else {
     replyStyle = "";

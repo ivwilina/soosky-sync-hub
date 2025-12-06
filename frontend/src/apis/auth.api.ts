@@ -12,9 +12,9 @@ const login = async (email: string, password: string) => {
     }),
   });
 
-  const data = await response.json();
+  const res = await response.json();
 
-  return data;
+  return res;
 };
 
 export { login };

@@ -1,78 +1,41 @@
+.active {
+  border-right: 0.2rem solid var(--primary-border-color);
+}
+
 .navbar-route-wrapper {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 0.6rem 0.2rem;
+  padding: 1rem;
+  width: 10rem;
+  /* border-right: 0.2rem solid var(--primary-color); */
 }
 
 .navbar-route-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 0.5rem;
 }
 
 .navbar-route-container img {
-  margin: 0 0.8rem;
-  width: 2rem;
+  width: 1.5rem;
 }
 
 .navbar-route-container span {
   text-transform: lowercase;
 }
 
+a {
+  text-decoration: none;
+  color: var(--primary-invert-color);
+}
+
 /* animation */
 
-.navbar-route-wrapper {
-  animation: navbar-route-hover-reverse forwards 0.1s linear;
-}
 .navbar-route-wrapper:hover {
-  animation: navbar-route-hover forwards 0.1s linear;
-}
-.navbar-route-wrapper span {
-  animation: navbar-route-span-hover-reverse forwards 0.1s linear;
-}
-.navbar-route-wrapper:hover span {
-  animation: navbar-route-span-hover forwards 0.1s linear;
-}
-
-@keyframes navbar-route-hover {
-  from {
-    background-color: var(--primary-color);
-  }
-  to {
-    background-color: var(--secondary-color);
-  }
-}
-
-@keyframes navbar-route-hover-reverse {
-  from {
-    background-color: var(--secondary-color);
-  }
-  to {
-    background-color: var(--primary-color);
-  }
-}
-
-@keyframes navbar-route-span-hover {
-  from {
-    display: none;
-    font-size: 0;
-  }
-  to {
-    display: block;
-    font-size: 1rem;
-  }
-}
-
-@keyframes navbar-route-span-hover-reverse {
-  from {
-    display: block;
-    font-size: 1rem;
-  }
-  to {
-    display: none;
-    font-size: 0;
-  }
+  border-right: 0.2rem solid var(--primary-border-color);
 }

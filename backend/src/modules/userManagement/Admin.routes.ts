@@ -28,7 +28,7 @@ export default class UserManagement_AdminRoutes{
 
   private async _GET_getAllUsers(req: Request, res: Response): Promise<any> {
     const output = await this._userService.getUsers();
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 
   private async _GET_getUserInformation(
@@ -36,7 +36,7 @@ export default class UserManagement_AdminRoutes{
     res: Response
   ): Promise<any> {
     const output = await this._userService.getUsers(req.params.id);
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 
 
@@ -45,7 +45,7 @@ export default class UserManagement_AdminRoutes{
     const userName = req.body.name;
     const userEmail = req.body.email;
     const output = await this._userService.createUser(userName, userEmail);
-    res.json(output);
+    res.status(output.status).json(output.data);
   }
 
   private async _PUT_modifyUserInformation(
@@ -56,7 +56,7 @@ export default class UserManagement_AdminRoutes{
     const updateInformation = {...req.body};
     console.log(updateInformation);
     const output = await this._userService.modifyUserInfomation(userId, updateInformation);
-    res.json(output)
+    res.status(output.status).json(output.data);
   }
 
   private async _DELETE_deleteUsers(
@@ -65,6 +65,6 @@ export default class UserManagement_AdminRoutes{
   ): Promise<any> {
     const userId = req.body.userId;
     const output = await this._userService.deleteUsers(userId);
-    res.json(output)
+    res.status(output.status).json(output.data);
   }
 }

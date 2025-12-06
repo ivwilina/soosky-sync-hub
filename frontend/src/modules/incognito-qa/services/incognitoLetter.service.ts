@@ -6,6 +6,7 @@ import {
   getSelectedIncognitoLetter,
   replyAnIncognitoLetter,
   sendIncognitoLetter,
+  changeIncognitoLetterStatus
 } from "../../../apis/incognitoLetter.api";
 
 type IncognitoLetter = {
@@ -64,6 +65,7 @@ interface IIncognitoLetterService {
     userName: string,
     replyMsg: string
   ) => Promise<void>;
+  changeLetterStatus: (letterId: string, status: string) => Promise<void>;
 }
 
 const useIncognitoLetterService = (
@@ -78,49 +80,99 @@ const useIncognitoLetterService = (
   );
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (loading) {
+      if (userPermission === "admin") {
+        console.log(`
+      ===========================================
+      reload letter list (admin)
+      -------------------------------------------
+      `);
+        getAllLetters();
+        setLoading(false);
+      } else {
+        console.log(`
+      ===========================================
+      reload letter list (user)
+      -------------------------------------------
+      `);
+        getAllPersonalLetters(userId);
+        setLoading(false);
+      }
+    }
+  }, [loading, userPermission, userId]);
+
   const sendLetter = async (
     userId: string,
     userName: string,
     letterTitle: string,
     letterContent: string
   ) => {
+    console.log(`
+      ===========================================
+      sendLetter
+      -------------------------------------------
+      `);
+
     const res = await sendIncognitoLetter(
       userId,
       userName,
       letterTitle,
       letterContent
     );
-    if (res.status === 201) {
+    if (!("errmsg" in res)) {
       setLoading(true);
     }
   };
 
   const getLetter = async (letterId: string) => {
+    console.log(`
+      ===========================================
+      getLetter
+      -------------------------------------------
+      `);
     const res = await getSelectedIncognitoLetter(letterId);
-    if (res.status === 200) {
-      setIncognitoLetter(res.data);
+    if (!("errmsg" in res)) {
+      const updatedLetter = res;
+      setIncognitoLetter(updatedLetter);
+      setLoading(true);
     }
   };
 
   const getAllLetters = async () => {
+    console.log(`
+      ===========================================
+      getAllLetters
+      -------------------------------------------
+      `);
     const res = await getAllIncognitoLetters();
-    if (res.status === 200) {
-      setIncognitoLettersList(res.data);
+    if (!("errmsg" in res)) {
+      setIncognitoLettersList(res);
       setLoading(false);
     }
   };
 
   const getAllPersonalLetters = async (userId: string) => {
+    console.log(`
+      ===========================================
+      getAllPersonalLetters
+      -------------------------------------------
+      `);
     const res = await getAllPersonalIncognitoLetters(userId);
-    if (res.status === 200) {
-      setIncognitoLettersList(res.data);
+    if (!("errmsg" in res)) {
+      setIncognitoLettersList(res);
       setLoading(false);
     }
   };
 
   const deleteLetter = async (letterId: string[]) => {
+    console.log(`
+      ===========================================
+      deleteLetter
+      -------------------------------------------
+      `);
     const res = await deleteIncognitoLetter(letterId);
-    if (res.status === 200) {
+    if (!("errmsg" in res)) {
       setLoading(true);
     }
   };
@@ -131,27 +183,39 @@ const useIncognitoLetterService = (
     userName: string,
     replyMsg: string
   ) => {
+    console.log(`
+      ===========================================
+      replyLetter
+      -------------------------------------------
+      `);
     const res = await replyAnIncognitoLetter(
       letterId,
       userId,
       userName,
       replyMsg
     );
-    if (res.status === 200) {
+    if (!("errmsg" in res)) {
       setLoading(true);
-      await getAllPersonalIncognitoLetters(userId)
     }
   };
 
-  useEffect(() => {
-    if (loading) {
-      if (userPermission === "admin") {
-        getAllLetters();
-      } else {
-        getAllPersonalLetters(userId);
-      }
+  const changeLetterStatus = async (
+    letterId: string,
+    status: string
+  ) => {
+    console.log(`
+      ===========================================
+      changeLetterStatus
+      -------------------------------------------
+      `);
+    const res = await changeIncognitoLetterStatus(
+      letterId,
+      status,
+    );
+    if (!("errmsg" in res)) {
+      setLoading(true);
     }
-  }, [loading, userPermission, userId]);
+  };
 
   return {
     incognitoLettersList,
@@ -162,9 +226,10 @@ const useIncognitoLetterService = (
     getAllPersonalLetters,
     deleteLetter,
     replyLetter,
+    changeLetterStatus
   };
 };
 
 export default useIncognitoLetterService;
 
-export type { IncognitoLetter};
+export type { IncognitoLetter };

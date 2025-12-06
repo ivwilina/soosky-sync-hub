@@ -1,8 +1,6 @@
 .letter-compose-wrapper {
   background-color: var(--secondary-color);
-  margin: 1rem;
   display: flex;
-  border-radius: 15px;
   width: 100%;
 }
 

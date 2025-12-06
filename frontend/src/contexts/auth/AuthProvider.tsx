@@ -29,7 +29,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     const loginData = await apiLogin(email, password);
-    const userInfo: User = loginData.data;
+    const userInfo: User = loginData;
     if (!("errmsg" in userInfo)) {
       const newStoredUser = {
         ...userInfo,
