@@ -1,15 +1,18 @@
-import React, { useState, type ChangeEvent } from "react";
-import "../styles/login.css";
+import React, { useEffect, useState, type ChangeEvent } from "react";
+import "../style/login.css";
 import { useAuth } from "../../../contexts/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 
 /*-----------------------------------------------------------------------------------------*/
 
 const Login = () => {
-  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-
-  if(isAuthenticated) navigate("/dashboard", { replace: true });
+  const { login, isAuthenticated, isLoading } = useAuth();
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isAuthenticated, isLoading, navigate]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

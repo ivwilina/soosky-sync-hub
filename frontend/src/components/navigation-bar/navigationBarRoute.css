@@ -1,5 +1,5 @@
 .active {
-  border-right: 0.2rem solid var(--primary-border-color);
+  border-right: 0.2rem solid var(--primary-border-color) !important;
 }
 
 .navbar-route-wrapper {
@@ -9,7 +9,7 @@
   justify-content: center;
   padding: 1rem;
   width: 10rem;
-  /* border-right: 0.2rem solid var(--primary-color); */
+  border-right: 0.2rem solid transparent;
 }
 
 .navbar-route-container {

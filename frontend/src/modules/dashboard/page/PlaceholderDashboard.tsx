@@ -1,6 +1,6 @@
 import React from "react";
 import ConstructionIcon from "../../../assets/icons/construction.svg";
-import "../styles/placeholderDashboard.css";
+import "../style/placeholderDashboard.css";
 import { useAuth } from "../../../contexts/auth/useAuth";
 
 const PlaceholderDashboard = () => {

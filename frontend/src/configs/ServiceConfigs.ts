@@ -1,3 +1,3 @@
 export const ServiceCfg = {
-  baseUrl: "http://localhost:3000",
+  baseUrl: import.meta.env.VITE_BASE_URL,
 };

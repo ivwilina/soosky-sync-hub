@@ -5,6 +5,7 @@ type UserRole = "guest" | "employee" | "admin";
 type User = {
   userId: string;
   userName: string;
+  userEmail: string;
   token: string;
   permission: UserRole;
 };

@@ -8,15 +8,16 @@ import {
   RouterProvider,
   type RouteObject,
 } from "react-router-dom";
-import Login from "./modules/auth/pages/Login.tsx";
+import Login from "./modules/auth/page/Login.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import PlaceholderDashboard from "./modules/dashboard/pages/PlaceholderDashboard.tsx";
-import LetterBox from "./modules/incognito-qa/pages/LetterBox.tsx";
+import PlaceholderDashboard from "./modules/dashboard/page/PlaceholderDashboard.tsx";
+import LetterBox from "./modules/incognito-qa/page/LetterBox.tsx";
 import AuthProvider from "./contexts/auth/AuthProvider.tsx";
+import Profile from "./modules/profile/page/Profile.tsx";
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: "",
     element: <Login />,
   },
   {
@@ -28,6 +29,7 @@ const routes: RouteObject[] = [
         children: [
           { path: "dashboard", element: <PlaceholderDashboard /> },
           { path: "incognito-letter", element: <LetterBox /> },
+          { path: "profile", element: <Profile /> },
           // { index: true, element: <PlaceholderDashboard /> },
         ],
       },

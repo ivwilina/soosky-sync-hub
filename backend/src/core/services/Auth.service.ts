@@ -19,6 +19,7 @@ export default class AuthServices {
         data: {
           userId: user._id,
           userName: user.name,
+          userEmail:user.email,
           permission: user.permission,
           token: jwtToken,
         },

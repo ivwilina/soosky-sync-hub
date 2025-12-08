@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "../styles/letterBox.css";
+import "../style/letterBox.css";
 import LetterMini from "../../../components/letter/LetterMini";
 import LetterView from "../../../components/letter/LetterView";
 import LetterCompose from "../../../components/letter/LetterCompose";
-import useIncognitoLetterService from "../services/incognitoLetter.service";
-import type { IncognitoLetter } from "../services/incognitoLetter.service";
+import useIncognitoLetterService from "../service/incognitoLetter.service";
+import type { IncognitoLetter } from "../service/incognitoLetter.service";
 import { useAuth } from "../../../contexts/auth/useAuth";
 
 /*-----------------------------------------------------------------------------------------*/
